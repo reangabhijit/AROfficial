@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AR Official - Research Scholar Platform by Dr. Abhijit Reang from Tripura University">
+    <meta name="author" content="Dr. Abhijit Reang">
+    <meta name="keywords" content="Bioinformatics, Molecular Biology, Research, Tutorials, Tools">
+    
+    <title>AR Official - Bioinformatics Research Platform</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🧬 AR Official</h1>
+                <p>Research & Learning Platform</p>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="#discussions" class="nav-link">Discussions</a></li>
+            </ul>
+            
+            <div id="authBtnGroup" class="auth-btn">
+                <button class="auth-btn login-btn" onclick="openAuthModal()">
+                    <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+                </button>
+            </div>
+            
+            <div id="userProfile"></div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            
+            <!-- Email Step -->
+            <div id="emailStep">
+                <h2><i class="fas fa-envelope"></i> Login</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Enter your name and email to get started. We'll send you an OTP to verify your identity.
+                </p>
+                
+                <div class="form-group">
+                    <label for="userNameInput">Full Name *</label>
+                    <input type="text" id="userNameInput" placeholder="e.g., John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userEmailInput">Email Address *</label>
+                    <input type="email" id="userEmailInput" placeholder="your@email.com" required>
+                </div>
+                
+                <button class="btn btn-primary" id="requestOtpBtn">
+                    <i class="fas fa-paper-plane"></i> Request OTP
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">
+                    🔐 Your data is secure. We never share your information.
+                </p>
+            </div>
+            
+            <!-- OTP Step -->
+            <div id="otpStep">
+                <h2><i class="fas fa-lock"></i> Verify OTP</h2>
+                
+                <div class="otp-info">
+                    <p>👋 Welcome, <span class="user-greeting" id="userNameForOTP"></span>!</p>
+                    <p style="margin-top: 0.5rem;">We've sent a 6-digit OTP to your email. It expires in 10 minutes.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="otpInput">Enter OTP *</label>
+                    <input type="text" id="otpInput" placeholder="000000" maxlength="6" inputmode="numeric" required>
+                </div>
+                
+                <button class="btn btn-primary" id="loginBtn">
+                    <i class="fas fa-check"></i> Verify & Login
+                </button>
+                
+                <button class="btn" style="background-color: var(--text-secondary); color: white; margin-top: 0.5rem;" 
+                        onclick="document.getElementById('emailStep').style.display='block'; document.getElementById('otpStep').style.display='none';">
+                    ← Back
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">
+                    <strong>Demo Mode:</strong> Check the browser console or alert for the OTP. In production, it's sent via email.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <img src="https://ui-avatars.com/api/?name=Dr.+Abhijit+Reang&background=667eea&color=fff&size=150" alt="Profile" class="hero-avatar">
+            <h1>Welcome to AR Official</h1>
+            <p><i class="fas fa-graduation-cap"></i> Dr. Abhijit Reang</p>
+            <p>Research Scholar | Tripura University</p>
+            <p class="hero-bio">
+                Department of Molecular Biology and Bioinformatics<br>
+                <strong>Dedicated to advancing research in bioinformatics and molecular biology through quality education and open knowledge sharing.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About This Platform</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="tutorialCount">12</div>
+                    <div class="stat-label">Video Tutorials</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="memberCount">5</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Useful Tools & Databases</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Knowledge Sharing</div>
+                </div>
+            </div>
+            
+            <div style="background-color: #f0f9ff; padding: 2rem; border-radius: 10px; border-left: 4px solid var(--primary-color); margin-top: 2rem;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🎯 Platform Features</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-play-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>Video Tutorials:</strong> Comprehensive learning materials on bioinformatics topics</li>
+                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-link" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>Curated Resources:</strong> Links to essential databases and tools for research</li>
+                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-comments" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>Community Discussions:</strong> Share problems, solutions, and insights</li>
+                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-lock" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>Secure Authentication:</strong> Email + OTP verification for data security</li>
+                    <li><i class="fas fa-user-shield" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>User Roles:</strong> Different access levels for viewers and administrators</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutorials">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Video Tutorials</h2>
+            <div class="tutorials-grid" id="tutorials-grid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources">
+        <div class="container">
+            <h2><i class="fas fa-toolbox"></i> Tools & Databases</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Essential resources for your research work. Click to explore each tool.
+            </p>
+            <div class="resources-grid" id="resources-grid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Discussions Section -->
+    <section id="discussions">
+        <div class="container">
+            <h2><i class="fas fa-comments"></i> Community Discussions</h2>
+            <div class="discussions-container">
+                <!-- Discussion Form - Only visible if logged in -->
+                <div id="discussionFormContainer" style="display: none;">
+                    <div class="discussion-form">
+                        <h3>Start a New Discussion</h3>
+                        <textarea id="discussionInput" placeholder="Share your thoughts, questions, or insights..."></textarea>
+                        <button class="btn btn-primary" onclick="postDiscussion()">
+                            <i class="fas fa-paper-plane"></i> Post Discussion
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Discussions List -->
+                <div class="discussions-list" id="discussionsList">
+                    <p style="text-align: center; color: var(--text-secondary);">
+                        👋 <a href="javascript:openAuthModal()" style="color: var(--primary-color);">Login to join the discussion</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="adminDashboard">
+        <div class="container">
+            <h3><i class="fas fa-cog"></i> Admin Dashboard</h3>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="uploadTutorial">Upload Tutorial</button>
+                <button class="admin-tab" data-tab="addResource">Add Resource</button>
+                <button class="admin-tab" data-tab="editProfile">Edit Profile</button>
+            </div>
+            
+            <!-- Upload Tutorial Tab -->
+            <div id="uploadTutorial" class="tab-content active">
+                <form class="admin-form" id="uploadTutorialForm">
+                    <div class="form-group">
+                        <label>Tutorial Title</label>
+                        <input type="text" placeholder="Enter tutorial title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea placeholder="Enter tutorial description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>YouTube Embed URL</label>
+                        <input type="text" placeholder="https://www.youtube.com/embed/..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Upload Tutorial
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Add Resource Tab -->
+            <div id="addResource" class="tab-content">
+                <form class="admin-form" id="addResourceForm">
+                    <div class="form-group">
+                        <label>Resource Name</label>
+                        <input type="text" placeholder="Tool or database name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea placeholder="Brief description of the resource" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Resource Link</label>
+                        <input type="url" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Resource
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Edit Profile Tab -->
+            <div id="editProfile" class="tab-content">
+                <form class="admin-form" id="profileForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="profileName" placeholder="Dr. Abhijit Reang" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea id="profileBio" placeholder="Your bio and research interests" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Picture URL</label>
+                        <input type="url" placeholder="https://..." />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>AR Official</strong> © 2026 | Bioinformatics Research Platform</p>
+            <p style="margin-top: 0.5rem; opacity: 0.9;">
+                Created by Dr. Abhijit Reang | Research Scholar at Tripura University
+            </p>
+            <p style="margin-top: 0.5rem; opacity: 0.8; font-size: 0.9rem;">
+                <i class="fas fa-code"></i> Built with HTML5, CSS3 & JavaScript | Deployed on GitHub Pages
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    
+    <script>
+        // Admin Tab Switching
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Discussion System
+        function postDiscussion() {
+            if (!authManager.isLoggedIn()) {
+                alert('Please login to post discussions.');
+                openAuthModal();
+                return;
+            }
+
+            const input = document.getElementById('discussionInput');
+            const content = input.value.trim();
+
+            if (!content) {
+                alert('Please enter some content.');
+                return;
+            }
+
+            const discussions = JSON.parse(localStorage.getItem('discussions')) || [];
+            const newDiscussion = {
+                id: discussions.length + 1,
+                author: authManager.currentUser.name,
+                email: authManager.currentUser.email,
+                avatar: authManager.currentUser.avatar,
+                content,
+                comments: [],
+                createdAt: new Date().toISOString()
+            };
+
+            discussions.unshift(newDiscussion);
+            localStorage.setItem('discussions', JSON.stringify(discussions));
+            input.value = '';
+            renderDiscussions();
+        }
+
+        function renderDiscussions() {
+            const discussionsList = document.getElementById('discussionsList');
+            const discussions = JSON.parse(localStorage.getItem('discussions')) || [];
+
+            if (!authManager.isLoggedIn()) {
+                discussionsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">👋 <a href="javascript:openAuthModal()" style="color: var(--primary-color);">Login to join the discussion</a></p>';
+                return;
+            }
+
+            if (discussions.length === 0) {
+                discussionsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No discussions yet. Be the first to start one!</p>';
+                return;
+            }
+
+            discussionsList.innerHTML = discussions.map(discussion => `
+                <div class="discussion-item">
+                    <div class="discussion-header">
+                        <img src="${discussion.avatar}" alt="${discussion.author}" class="discussion-avatar">
+                        <div class="discussion-meta">
+                            <div class="discussion-author">${discussion.author}</div>
+                            <div class="discussion-date">${new Date(discussion.createdAt).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                    <div class="discussion-content">${discussion.content}</div>
+                    <div class="discussion-comments">
+                        <strong style="font-size: 0.9rem;">💬 Comments (${discussion.comments.length})</strong>
+                        ${discussion.comments.map(comment => `
+                            <div class="comment">
+                                <img src="${comment.avatar}" alt="${comment.author}" class="comment-avatar">
+                                <div class="comment-content">
+                                    <div class="comment-author">${comment.author}</div>
+                                    <div class="comment-text">${comment.text}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="comment-input-group">
+                            <input type="text" placeholder="Add a comment..." class="discussion-comment-input" data-id="${discussion.id}">
+                            <button onclick="addComment(${discussion.id})">Post</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addComment(discussionId) {
+            if (!authManager.isLoggedIn()) {
+                alert('Please login to comment.');
+                return;
+            }
+
+            const input = document.querySelector(`.discussion-comment-input[data-id="${discussionId}"]`);
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            const discussions = JSON.parse(localStorage.getItem('discussions')) || [];
+            const discussion = discussions.find(d => d.id === discussionId);
+
+            if (discussion) {
+                discussion.comments.push({
+                    author: authManager.currentUser.name,
+                    avatar: authManager.currentUser.avatar,
+                    text,
+                    createdAt: new Date().toISOString()
+                });
+
+                localStorage.setItem('discussions', JSON.stringify(discussions));
+                renderDiscussions();
+            }
+        }
+
+        // Initialize discussions visibility and rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            const formContainer = document.getElementById('discussionFormContainer');
+            
+            if (authManager.isLoggedIn()) {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+
+            renderDiscussions();
+
+            // Re-render when user logs in/out
+            const originalLogout = authManager.logout.bind(authManager);
+            authManager.logout = function() {
+                originalLogout();
+                formContainer.style.display = 'none';
+                renderDiscussions();
+            };
+        });
+
+        // Watch for authentication changes
+        const originalLogin = authManager.login.bind(authManager);
+        authManager.login = function(...args) {
+            const result = originalLogin(...args);
+            if (result.success) {
+                document.getElementById('discussionFormContainer').style.display = 'block';
+                renderDiscussions();
+            }
+            return result;
+        };
+    </script>
+</body>
+</html>
